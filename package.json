@@ -1,0 +1,19 @@
+{
+  "name": "techm",
+  "version": "1.0.0",
+  "description": "tech",
+  "main": "app.js",
+  "scripts": {
+    "test": "nodemon app.js"
+  },
+  "author": "aakash sunar",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "nodemon": "^2.0.4",
+    "shelljs": "^0.8.4",
+    "string": "^3.3.3"
+  }
+}

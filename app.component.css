@@ -1,0 +1,27 @@
+.a{
+    color:blue!important;
+    margin-top: 2rem;
+    text-align: center;
+}
+.container{
+    width: 750px !important;
+
+    margin-top: 5rem;
+    /* background-color:#f7bb97; */
+    background-image: linear-gradient(#a8c0ff,#3f2b96);
+}
+.b{
+    margin-left: -220px;
+    font-weight: bold;
+    font-size: large;
+    font-family:  "Comic Sans MS", cursive, sans-serif;
+}
+.btn{
+    background-color:black;
+
+
+}
+.e{
+    margin-left: 278px;
+}
+

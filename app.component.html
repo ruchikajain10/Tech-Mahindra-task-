@@ -1,0 +1,113 @@
+
+<div class="container">
+<div class="mx-auto">
+  <h1 class="a" >Orderers</h1>
+  <div *ngIf="submitted"><h1 style="margin-top: 20%; margin-left:40%">Thank you</h1></div>
+  <form #userForm="ngForm" *ngIf="!submitted" (ngSubmit)="onSubmit()" novalidate class="e" >
+    <div class="form-group col-lg-5 ">
+      
+    
+    </div>
+
+   
+    <div class="form-group margin-left: -135px;margin-top: -71px;" >
+      <label for="c" class="b">Orderer Type</label>
+      <select  name="name" required #name="ngModel" [class.is-invalid]="name.invalid && name.touched" class="form-control" id="c" #input (change)='updateValues(input.value)' [(ngModel)]="ordererModule.name" style="margin-top: -35px;width: 70%">
+             <option value="{{con}}" *ngFor='let con of data' >{{con}}</option>
+      </select>
+    </div> 
+    
+    <div class="form-group" *ngIf="orderType">
+      <label for="c" class="b">Number of Orderers</label>
+      <select name="count" class="form-control" id="c" #input (change)='addTextbox(input.value)' [(ngModel)]="ordererModule.count "style="margin-top: -35px;width: 70%" >
+          <option value="{{con}}" *ngFor='let con of orderTypeContain' style="margin-top: -35px;width: 70%">{{con}}</option>
+      </select>
+    </div>
+    <div  ngModelGroup="orderername" style="margin-left: -75px;"> 
+      <div *ngFor = "let num of numbers"  class="form-group " >
+        <br>
+        
+        <label >Orderer {{num}} : &nbsp; </label>
+        <input  type="text"  required #orderername = "ngModel"  [class.is-invalid]="orderername.invalid && orderername.touched" name="orderername[{{num}}]" [(ngModel)]="ordererModule.orderername[num] ">
+        
+      </div>
+    </div>
+    <div class="form-group" >
+
+      <label class="b">Number of organisations</label>
+      <select name="numberOfOrgs" class="form-control" #input1 (change)='addbox(input1.value)' [(ngModel)]="ordererModule.numberOfOrgs"style="margin-top: -35px;width: 70%">
+        <option value=""></option>
+        <option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">{{i}}</option>
+    </select>
+    </div>
+    <div  ngModelGroup="orgname "> 
+      <div *ngFor = "let num1 of numbers1" class="form-group  " >
+        <br>
+        
+        <label style="margin-left: 8px;" >Org {{num1}} : &nbsp; </label>
+        <input  type="text"  required  #orgname = "ngModel" name="orgname[{{num1}}]" [(ngModel)]="ordererModule.orgname[num1]" >
+        <div ngModelGroup="numberofpeers">
+        <br><label style="margin-left: -134px;">Number of peers</label>
+        <div>
+          <select name="numberOfpeers{{num1}}" class="form-control" #numberofpeers="ngModel" #input2 (change)="addbox1(num1,input2.value)"  [(ngModel)]="ordererModule.numberofpeers[num1]"style="width:70%;margin-top: -35px;">
+            <option value=""></option>
+            <option *ngFor="let j of [1,2,3,4,5,6,7,8,9,10]">{{j}}</option>
+        </select>
+        </div>
+        
+    </div>
+
+    <div ngModelGroup="peernames{{num1}}">
+      <div *ngFor="let num2 of numbers2[num1]">
+        <label style=" width: 39%; padding: 15px; margin-left: -110px;">Org {{num1}} peer {{num2}}: &nbsp; </label>
+        <input  type="text"  required  name="peernames[{{num1}},{{num2}}]" [(ngModel)]="ordererModule.peernames[num1][num2]" >
+        <label style=" width: 72%;padding: 3px; margin-left: -103px;" >Org {{num1}} peerport {{num2}}: &nbsp; </label>
+        <input style="margin-left: -151px;" type="text"  required  name="peerports[{{num1}},{{num2}}]" [(ngModel)]="ordererModule.peerports[num1][num2]" >
+      </div>
+    </div>
+  
+  
+  
+      </div>
+    </div>
+
+    <div class="form-group" >
+
+      <label class="b">Number of Channel</label>
+      <select name="numberOfChannels" class="form-control" #input3 (change)='addbox2(input3.value)' [(ngModel)]="ordererModule.numberOfChannels"style="margin-top: -35px;width: 70%">
+        <option value=""></option>
+        <option *ngFor="let i of [1,2,3,4,5,6,7,8,9,10]">{{i}}</option>
+    </select>
+    
+  </div>
+
+      <div *ngFor = "let num3 of numbers3" class="form-group  " style="text-align: center;" >
+        <br>
+        <label style="margin-left: -233px;">Channel {{num3}} : &nbsp; </label>
+         <input  type="text"  required  name="channelname[{{num3}}]" [(ngModel)]="ordererModule.channelname[num3]" >
+         <div *ngFor="let num4 of ordererModule.orgname; let index1 = index">
+          <input type="checkbox" name="channelorg[{{num3}}][{{index1}}]" default="false"  [(ngModel)]="ordererModule.channelorg[num3][index1]" style="  margin-top: 20px;margin-left: -200px;" >{{num4}}
+          <div ngModelGroup="channelpeer{{num3}}"> 
+          <div *ngFor="let num5 of ordererModule.peernames[index1]; let index2 = index">
+            <input type="checkbox"  name="channelpeer[{{num3}}][{{index1}}][{{index2}}]"  [(ngModel)]="ordererModule.channelpeer[num3][index1][index2]" ng-true-value="aakash" ng-false-value="sai" style="margin-left: -196px;">{{num5}}
+          </div>
+        </div>
+        
+        </div>
+      </div>
+   
+
+
+    <div class="form-group col-lg-5  text-center">
+      <button [disabled]="userForm.form.invalid "  class="btn btn-primary" style="margin-left: -164px;" type="submit" >Submit</button>
+
+
+
+    </div>
+    
+
+
+  </form>
+
+</div>
+</div>
